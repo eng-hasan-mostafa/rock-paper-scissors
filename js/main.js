@@ -1,6 +1,5 @@
 
-let computerScore  = 0;
-let humanScore     = 0;
+const GAME_ROUNDS = 5;
 
 function getComputerChoice() {
 
@@ -28,19 +27,21 @@ function getHumanChoice() {
 
 function playRound(humanChoice, computerChoice) {
 
+    let result;
     if(humanChoice === 'rock') {
 
         switch(computerChoice) {
             case 'paper':
                 console.log('You lose! Paper beats Rock');
-                computerScore++;
+                result = 'computer wins';
                 break;
             case 'scissors':
                 console.log('You win! Rock beats Scissors');
-                humanScore++;
+                result = 'human wins';
                 break;
             case 'rock':
                 console.log('It\'s a draw!');
+                result = 'draw';
                 break;
         }
     }else if(humanChoice === 'paper') {
@@ -48,14 +49,15 @@ function playRound(humanChoice, computerChoice) {
         switch(computerChoice) {
             case 'rock':
                 console.log('You win! Paper beats Rock');
-                humanScore++;
+                result = 'human wins';
                 break;
             case 'scissors':
                 console.log('You lose! Scissors beats Paper');
-                computerScore++;
+                result = 'computer wins';
                 break;
             case 'paper':
                 console.log('It\'s a draw!');
+                result = 'draw';
                 break;
         }
     }else if(humanChoice === 'scissors') {
@@ -63,23 +65,49 @@ function playRound(humanChoice, computerChoice) {
         switch(computerChoice) {
             case 'rock':
                 console.log('You lose! Rock beats Scissors');
-                computerScore++;
+                result = 'computer wins';
                 break;
             case 'paper':
                 console.log('You win! Scissors beats Paper');
-                humanScore++;
+                result = 'human wins';
                 break;
             case 'scissors':
                 console.log('It\'s a draw!');
+                result = 'draw';
                 break;
         }
     }
+
+    return result;
 }
 
+function playGame() {
+    
+    let computerScore       = 0;
+    let humanScore          = 0;
+    let playedRoundsCounter = 0;
+    let humanSelection;
+    let computerSelection;
+    let roundResult;
+    while(playedRoundsCounter < GAME_ROUNDS) {
+        
+        humanSelection     = getHumanChoice();
+        computerSelection  = getComputerChoice();
+        roundResult        = playRound(humanSelection, computerSelection);
+        switch(roundResult) {
+            case 'human wins':
+                humanScore++;
+                break;
+            case 'computer wins':
+                computerScore++;
+                break;
+        }
+        playedRoundsCounter++;
+    }
+    
+    console.log('human score', humanScore);
+    console.log('computer score', computerScore);
+    (humanScore > computerScore) ? console.log('Congrats! you win the game.') : console.log('Hard luck, you lose the game.');
+}
 
-const humanSelection    = getHumanChoice();
-const computerSelection = getComputerChoice();
-
-playRound(humanSelection, computerSelection);
-console.log('human score', humanScore);
-console.log('computer score', computerScore);
+playGame();
