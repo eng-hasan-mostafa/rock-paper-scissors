@@ -1,5 +1,5 @@
 
-const GAME_ROUNDS = 5;
+const GAME_ROUNDS_NUMBER = 5;
 
 function getComputerChoice() {
 
@@ -18,7 +18,9 @@ function getHumanChoice() {
 
     let userChoice = prompt('What do you choose? rock,paper or scissors?');
     userChoice = userChoice.toLowerCase();
-    if(userChoice === 'rock' || userChoice === 'paper' || userChoice === 'scissors') {
+    if(userChoice === 'rock' ||
+       userChoice === 'paper' ||
+       userChoice === 'scissors') {
         return userChoice;
     } else {
         alert('Invalid input!');
@@ -27,21 +29,21 @@ function getHumanChoice() {
 
 function playRound(humanChoice, computerChoice) {
 
-    let result;
+    let roundResult;
     if(humanChoice === 'rock') {
 
         switch(computerChoice) {
             case 'paper':
                 console.log('You lose! Paper beats Rock');
-                result = 'computer wins';
+                roundResult = 'computer wins';
                 break;
             case 'scissors':
                 console.log('You win! Rock beats Scissors');
-                result = 'human wins';
+                roundResult = 'human wins';
                 break;
             case 'rock':
                 console.log('It\'s a draw!');
-                result = 'draw';
+                roundResult = 'draw';
                 break;
         }
     }else if(humanChoice === 'paper') {
@@ -49,15 +51,15 @@ function playRound(humanChoice, computerChoice) {
         switch(computerChoice) {
             case 'rock':
                 console.log('You win! Paper beats Rock');
-                result = 'human wins';
+                roundResult = 'human wins';
                 break;
             case 'scissors':
                 console.log('You lose! Scissors beats Paper');
-                result = 'computer wins';
+                roundResult = 'computer wins';
                 break;
             case 'paper':
                 console.log('It\'s a draw!');
-                result = 'draw';
+                roundResult = 'draw';
                 break;
         }
     }else if(humanChoice === 'scissors') {
@@ -65,20 +67,20 @@ function playRound(humanChoice, computerChoice) {
         switch(computerChoice) {
             case 'rock':
                 console.log('You lose! Rock beats Scissors');
-                result = 'computer wins';
+                roundResult = 'computer wins';
                 break;
             case 'paper':
                 console.log('You win! Scissors beats Paper');
-                result = 'human wins';
+                roundResult = 'human wins';
                 break;
             case 'scissors':
                 console.log('It\'s a draw!');
-                result = 'draw';
+                roundResult = 'draw';
                 break;
         }
     }
 
-    return result;
+    return roundResult;
 }
 
 function playGame() {
@@ -89,7 +91,7 @@ function playGame() {
     let humanSelection;
     let computerSelection;
     let roundResult;
-    while(playedRoundsCounter < GAME_ROUNDS) {
+    while(playedRoundsCounter < GAME_ROUNDS_NUMBER) {
         
         humanSelection     = getHumanChoice();
         computerSelection  = getComputerChoice();
@@ -107,7 +109,9 @@ function playGame() {
     
     console.log('human score', humanScore);
     console.log('computer score', computerScore);
-    (humanScore > computerScore) ? console.log('Congrats! you win the game.') : console.log('Hard luck, you lose the game.');
+    (humanScore > computerScore) ? 
+    console.log('Congrats! you win the game.') :
+    console.log('Hard luck, you lose the game.');
 }
 
 playGame();
